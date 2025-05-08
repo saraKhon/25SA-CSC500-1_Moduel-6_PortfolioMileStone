@@ -8,6 +8,7 @@ class ItemToPurchase:
         self.item_quantity = quantity         #int
         self.item_description = description   #string
 
+    # Method: multiply and return the total of the item (price * quantity)
     def total_cost(self):
         return self.item_price * self.item_quantity
 
@@ -21,35 +22,38 @@ class ShoppingCart:
         self.cart_items = []                   # empty list, empty shopping cart
 
 
-# methods
+# methods are below
 
+    # take the item and add it to the shopping cart. Doesn't return anything
     def add_item(self, item):
-        self.cart_items.append(item)   # take the item and add it to the shopping cart. Doesn't return anything
+        self.cart_items.append(item)
 
-
-    def remove_item(self, item_name):   # the item name that will be input to remove
+    # Removes item from cart_items list. Has a string (an item's name) parameter. Does not return anything.
+    # If item name cannot be found, output this message: Item not found in cart. Nothing removed.
+    def remove_item(self, item_name):
         for index, item in enumerate(self.cart_items):
             if item.item_name.lower() ==  item_name.lower():
                 del self.cart_items[index]
                 return
             print("No item founding cart. Nothing was removed")
 
-
-        def get_cart_items(self):
+    #getter method
+    def get_cart_items(self):
             return self.cart_items
 
-
     def modify_item(self, item_to_modify):
+        # for loop to index through each item in the cart
         for item in self.cart_items:
+            # checks to see if the name of the current item matches the item to change
             if item.item_name.lower() == item_to_modify.item_name.lower():
-                if item_to_modify.item_price !=0.0:
-                    item.item_price = item_to_modify.item_price
-                if item_to_modify.item_quantity !=0:
-                    item.item_quantity = item_to_modify.item_quantity
+                if item_to_modify.item_price !=0.0:   # if as long as the new item is not 0.0
+                    item.item_price = item_to_modify.item_price    # change it
+                if item_to_modify.item_quantity !=0:  # if as long as the new item quantity is no 0
+                    item.item_quantity = item_to_modify.item_quantity # update the quantity
                 if item_to_modify.item_description != "none":
                     item.item_description = item_to_modify.item_description
                 print(f"{item.item_name} has been updated.")
-                return
+                return # Exit the method once the item is found and changed
         print("Item not found in cart. Nothing to modify")
 
 
@@ -216,9 +220,10 @@ def main():
 
     print_menu(cart)
 
-# Run the program
+# Run the program.. Finally
 if __name__ == "__main__":
     main()
+
 
 
 
