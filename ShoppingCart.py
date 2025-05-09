@@ -15,6 +15,7 @@ class ItemToPurchase:
 
 
 # Class: ShoppingCart
+#Parameterized constructor, which takes the customer name and date as parameters
 class ShoppingCart:
     def __init__(self, customer_name = "none", current_date = "January 1,2020"):
         self.customer_name = customer_name      #string, like a name tag on the shopping cart
@@ -117,10 +118,7 @@ def print_Invoice(cart):
     print("{:>70} ${:<10.2f}".format("Tax (10%): ", tax))
     print("{:>70} ${:<10.2f}".format("Total with Tax: ", final_total))
 
-
-
 # The Print menu function
-
 def print_menu(cart):
     while True:
         print("\n" + "+" + "-" * 30 + "+")
