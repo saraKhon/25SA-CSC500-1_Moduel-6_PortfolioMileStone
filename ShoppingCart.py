@@ -15,6 +15,7 @@ class ItemToPurchase:
 
 
 # Class: ShoppingCart
+#Parameterized constructor, which takes the customer name and date as parameters
 class ShoppingCart:
     def __init__(self, customer_name = "none", current_date = "January 1,2020"):
         self.customer_name = customer_name      #string, like a name tag on the shopping cart
@@ -32,10 +33,11 @@ class ShoppingCart:
     # If item name cannot be found, output this message: Item not found in cart. Nothing removed.
     def remove_item(self, item_name):
         for index, item in enumerate(self.cart_items):
-            if item.item_name.lower() ==  item_name.lower():
+            if item.item_name.strip() == item_name.strip():
                 del self.cart_items[index]
+                print(f"{item_name} has been removed from the cart.")
                 return
-            print("No item founding cart. Nothing was removed")
+        print("Item not found in cart. Nothing was removed.")
 
     #getter method
     def get_cart_items(self):
@@ -46,11 +48,11 @@ class ShoppingCart:
         for item in self.cart_items:
             # checks to see if the name of the current item matches the item to change
             if item.item_name.lower() == item_to_modify.item_name.lower():
-                if item_to_modify.item_price !=0.0:   # if as long as the new item is not 0.0
+                if item_to_modify.item_price > 0:   # if as long as the new item is not 0.0
                     item.item_price = item_to_modify.item_price    # change it
-                if item_to_modify.item_quantity !=0:  # if as long as the new item quantity is no 0
+                if item_to_modify.item_quantity > 0:  # if as long as the new item quantity is no 0
                     item.item_quantity = item_to_modify.item_quantity # update the quantity
-                if item_to_modify.item_description != "none":
+                if item_to_modify.item_description and item_to_modify.item_description.lower() !="none":
                     item.item_description = item_to_modify.item_description
                 print(f"{item.item_name} has been updated.")
                 return # Exit the method once the item is found and changed
@@ -117,10 +119,7 @@ def print_Invoice(cart):
     print("{:>70} ${:<10.2f}".format("Tax (10%): ", tax))
     print("{:>70} ${:<10.2f}".format("Total with Tax: ", final_total))
 
-
-
 # The Print menu function
-
 def print_menu(cart):
     while True:
         print("\n" + "+" + "-" * 30 + "+")
@@ -141,7 +140,7 @@ def print_menu(cart):
             print("Type the word *MENU* to return back to the main menu. \n")
 
             while True:
-                name = input("Item Name: ")
+                name = input("Item Name:")
                 if name.lower() == "menu":
                     break
 
@@ -180,7 +179,8 @@ def print_menu(cart):
             name = input("Enter name of item to modify:")
             try:
                 new_price = float(input("Enter new price:"))
-                new_quantity = int(input("Enter new quantity: "))
+                new_quantity = int(input("Enter new quantity:"))
+                new_description = input("Enter new description (or type 'none' to leave unchanged):")
             except ValueError:
                 print("Error: Invalid input.")
                 continue
@@ -189,7 +189,9 @@ def print_menu(cart):
             item.item_name = name
             item.item_price = new_price
             item.item_quantity = new_quantity
+            item.item_description = new_description
             cart.modify_item(item)
+
 
         elif option == 'i':
             cart.print_description()
