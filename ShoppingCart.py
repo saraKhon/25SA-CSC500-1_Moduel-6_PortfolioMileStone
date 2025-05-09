@@ -87,10 +87,13 @@ class ShoppingCart:
 
 
 # ----------------------------------------------------------------------
-# Functions: print_Menu
+# Step 5:  print_Menu
+ # implements the print_menu() function.
+# print_menu() - has a ShoppingCart parameter and outputs a menu of options to manipulate the shopping cart
 # -----------------------------------------------------------------------
 
-# This function makes the Online shopping cart invoice clear organize and easy to read
+# Implement the print_menu() function
+# NOTE: This function makes the Online shopping cart invoice clear organize and easy to read
 def print_Invoice(cart):
     print(f"Customer Cart Name:{cart.customer_name} \t Purchase Date:{cart.current_date}")
     total_quantity = cart.get_num_items_in_cart()
@@ -120,6 +123,7 @@ def print_Invoice(cart):
     print("{:>70} ${:<10.2f}".format("Total with Tax: ", final_total))
 
 # The Print menu function
+# has a ShoppingCart parameter and outputs a menu of options to manipulate the shopping cart
 def print_menu(cart):
     while True:
         print("\n" + "+" + "-" * 30 + "+")
@@ -136,7 +140,7 @@ def print_menu(cart):
         option = input("Select an option:").lower()
 
         if option == 'a':
-            print("Adding items to your cart...")
+            print("ADD ITEM TO CART...")
             print("Type the word *MENU* to return back to the main menu. \n")
 
             while True:
@@ -159,7 +163,7 @@ def print_menu(cart):
                         break
                     quantity = int(quantity_input)
                 except ValueError:
-                    print("Error! Please enter valid numeric values for price and quantity.")
+                    print("Error! Please enter the for price and quantity.")
                     continue
 
                 item = ItemToPurchase()
@@ -172,17 +176,18 @@ def print_menu(cart):
 
 
         elif option == 'r':
-            name = input("Enter the item to remove:")
+            name = input("Enter name of item to remove:")
             cart.remove_item(name)
+            print("REMOVE ITEM FROM CART:", name)
 
         elif option == 'c':
-            name = input("Enter name of item to modify:")
+            name = input("CHANGE ITEM NAME:")
             try:
-                new_price = float(input("Enter new price:"))
-                new_quantity = int(input("Enter new quantity:"))
-                new_description = input("Enter new description (or type 'none' to leave unchanged):")
+                new_price = float(input("CHANGE ITEM PRICE:"))
+                new_quantity = int(input("CHANGE ITEM QUANTITY:"))
+                new_description = input("CHANGE ITEM DESCRIPTION:")
             except ValueError:
-                print("Error: Invalid input.")
+                print("Error: TRY AGAIN.")
                 continue
 
             item = ItemToPurchase()
@@ -200,7 +205,7 @@ def print_menu(cart):
             print_Invoice(cart)
 
         elif option == 'q':
-            print(" Exit application")
+            print(" THANK YOU FOR YOUR BUINESS...GOOD BYE!")
             break
         else:
             print("Wrong option. Please choose again.")
